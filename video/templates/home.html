@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'video/style.css' %}">
+  <p>
+    <a href="https://nowpayments.io/donation/pupvid">Donate here to support us.</a>
+  </p>
+{% if videos.has_previous %}
+    <a class="btn btn-primary" href="?page={{ videos.previous_page_number }}">Previous</a>
+{% endif %}
+{% if videos.has_next %}
+    <a class="btn btn-primary" href="?page={{ videos.next_page_number }}">Next</a>
+{% endif %}
+<div class="row">
+{% for video in videos %}
+  <div class="column">
+<div class="card" style="width: 18rem;">
+  <video src="{{MEDIA_URL}}/{{video.video_file}}" poster="{{MEDIA_URL}}/{{video.thumbnail_image}}"></video>
+  <div class="card-body">
+    <h5 class="card-title">{{video.name}}</h5>
+    <p class="card-text">{{video.description}}</p>
+    <a href="/show_video/{{video.id}}" class="btn btn-primary">Watch</a>
+  </div>
+</div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

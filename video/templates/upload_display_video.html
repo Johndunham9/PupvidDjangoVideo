@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <body>
+		<div style="width: 500px; margin: auto;">
+			{% load crispy_forms_tags %}
+			<h1>Upload a Video</h1>
+			<fieldset name="Video File Upload and Display">
+				{% if msg %} {% autoescape off %} {{ msg }} {% endautoescape %} {% endif %}
+				<!--<form method="post" action="/" enctype="multipart/form-data">
+					{% csrf_token %}
+					<dl>
+						<p>
+							<label>Browse and select a video file</label>&nbsp;&nbsp;
+							<input type="file" name="file" autocomplete="off" required>
+						</p>
+					</dl>
+					<p>
+						<input type="submit" value="Upload video">
+					</p>
+				</form>-->
+				<form enctype="multipart/form-data" method="POST" action="">
+					{% csrf_token %}
+					{{ form|crispy }}
+					<input type="submit" value="Upload">
+				</form>
+			</fieldset>
+
+			<!--{% if filename %}
+				<div style="margin: 10px auto;">
+					<video autoplay="autoplay" controls="controls" preload="preload">
+						<source src="{{ MEDIA_URL }}/{{ filename }}" type="video/mp4"></source>
+					</video>
+				</div>
+			{% endif %}-->
+		</div>
+    </body>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+  		<div class="col-sm-10"><h1>Welcome, {{user.username}}!</h1></div>
+    </div>
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+
+
+      <div class="text-center">
+        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        <h6>Upload a different photo...</h6>
+        <input type="file" class="text-center center-block file-upload">
+      </div></hr><br>
+
+          <ul class="list-group">
+              <li class="list-group-item text-muted">My Profile<i class="fa fa-dashboard fa-1x"></i></li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Username</strong></span> {{user.username}}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Email</strong></span> {{user.email}}</li>
+          </ul>
+
+          <ul class="list-group">
+              <li class="list-group-item text-muted">My Channel<i class="fa fa-dashboard fa-1x"></i></li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong><a href="https://google.com">View my channel</a></strong></span></li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+          </ul>
+
+
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#profile">Edit Profile</a></li>
+                <li><a data-toggle="tab" href="#videos">My Videos</a></li>
+              </ul>
+
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="profile">
+                <hr>
+                  <form class="form" action="##" method="post" id="registrationForm">
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                              <label for="email"><h4>Change Email</h4></label>
+                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                              <label for="email"><h4>Verify New Email</h4></label>
+                              <input type="email" class="form-control" name="email" id="verify email" placeholder="you@email.com" title="enter your email.">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                              <label for="password"><h4>Change Password</h4></label>
+                              <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+                          </div>
+                      </div>
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                            <label for="password2"><h4>Verify New Password</h4></label>
+                              <input type="password" class="form-control" name="password2" id="password2" placeholder="password" title="enter your password2.">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                            </div>
+                      </div>
+              	</form>
+
+              <hr>
+            </div><!--/tab-pane-->
+
+            <div class="tab-pane" id="videos">
+                <h2></h2>
+                <div class="col-xs-12">
+                    <br>
+                    <a href="http://127.0.0.1:8000/upload">
+                        <button class="btn btn-lg btn-success" type="button">Upload a video</button>
+                    </a>
+                    <br>
+                </div>
+
+                <div class="row">
+                {% for video in videos %}
+                <div class="column">
+                <div class="card" style="width: 18rem;">
+                    <video src="{{MEDIA_URL}}/{{video.video_file}}" poster="{{MEDIA_URL}}/{{video.thumbnail_image}}"></video>
+                    <div class="card-body">
+                      <h5 class="card-title">{{video.name}}</h5>
+                      <p class="card-text">{{video.description}}</p>
+                      <a href="/show_video/{{video.id}}" class="btn btn-primary">Watch</a>
+                    </div>
+                </div>
+                </div>
+                {% endfor %}
+                </div>
+            </div><!--/tab-pane-->
+
+        </div><!--/tab-content-->
+
+    </div><!--/col-9-->
+</div><!--/row-->
+{% endblock %}
